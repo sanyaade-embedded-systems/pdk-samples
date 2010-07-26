@@ -17,7 +17,7 @@ LIBDIR="${PalmPDK}/host/lib"
 
 CPPFLAGS="-I${INCLUDEDIR} -I${INCLUDEDIR}/SDL -framework Cocoa -arch i386"
 LDFLAGS="-L${LIBDIR}"
-LIBS="-lSDL -lSDLmain -lGLESv2"
+LIBS="-lSDL -lSDLmain -lGLESv2 -lpdl"
 SRCDIR="../src"
 
 $CC $CPPFLAGS $LDFLAGS $LIBS -o ${BUILDDIR}/simple $SRCDIR/simple.cpp

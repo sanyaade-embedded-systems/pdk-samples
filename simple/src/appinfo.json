@@ -1,0 +1,9 @@
+{
+	"title": "SimplePDK",
+	"type": "pdk",
+	"main": "simple",
+	"id": "com.palmdts.app.simplepdk",
+	"version": "1.2.0",
+	"vendor": "Palm, Inc.",
+    "requiredMemory": 15
+}

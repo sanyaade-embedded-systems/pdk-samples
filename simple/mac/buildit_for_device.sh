@@ -23,7 +23,7 @@ export SRC="simple.cpp"
 ### List the libraries needed.                                      ###
 ### LIBS="-l<libname>"                                              ###
 #######################################################################
-export LIBS="-lSDL -lGLESv2"
+export LIBS="-lSDL -lGLESv2 -lpdl"
 
 #######################################################################
 ### Name your output executable                                     ###

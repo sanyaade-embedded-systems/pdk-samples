@@ -1,14 +1,15 @@
 @echo off
 @rem Set the device you want to build for to 1
-set PRE=1
-set PIXI=0
+@rem Use Pixi to allow running on either device
+set PRE=0
+set PIXI=1
 set DEBUG=0
 
 @rem List your source files here
 set SRC=simple.cpp
 
 @rem List the libraries needed
-set LIBS=-lSDL -lGLESv2
+set LIBS=-lSDL -lGLESv2 -lpdl
 
 @rem Name your output executable
 set OUTFILE=simple

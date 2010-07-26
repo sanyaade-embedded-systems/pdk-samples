@@ -7,6 +7,7 @@
 
 #include <GLES2/gl2.h>
 #include "SDL.h"
+#include "PDL.h"
 
 SDL_Surface *Surface;               // Screen surface to retrieve width/height information
 
@@ -258,7 +259,12 @@ int main(int argc, char** argv)
 {
     // Initialize the SDL library with the Video subsystem
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE);
-
+    atexit(SDL_Quit);
+    
+    // start the PDL library
+    PDL_Init(0);
+    atexit(PDL_Quit);
+    
     // Tell it to use OpenGL version 2.0
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 
@@ -276,21 +282,31 @@ int main(int argc, char** argv)
 
     // Event descriptor
     SDL_Event Event;
+    bool paused = false;
 
-    do {
+    while (1) {
         // Render our scene
         Display();
 
         // Make it visible on the screen
         SDL_GL_SwapBuffers();
 
-        // Process the events
-        while (SDL_PollEvent(&Event)) {
+        bool gotEvent;
+        if (paused) {
+            SDL_WaitEvent(&Event);
+            gotEvent = true;
+        }
+        else {
+            gotEvent = SDL_PollEvent(&Event);
+        }
+        
+        while (gotEvent) {
             switch (Event.type) {
                 // List of keys that have been pressed
                 case SDL_KEYDOWN:
                     switch (Event.key.keysym.sym) {
                         // Escape forces us to quit the app
+                        // this is also sent when the user makes a back gesture
                         case SDLK_ESCAPE:
                             Event.type = SDL_QUIT;
                             break;
@@ -300,16 +316,24 @@ int main(int argc, char** argv)
                     }
                     break;
 
+                case SDL_ACTIVEEVENT:
+                    if (Event.active.state == SDL_APPACTIVE) {
+                        paused = !Event.active.gain;
+                    }
+                    break;
+
+                case SDL_QUIT:
+                    // We exit anytime we get a request to quit the app
+                    // all shutdown code is registered via atexit() so this is clean.
+                    exit(0);
+                    break;
+
                 default:
                     break;
             }
+            gotEvent = SDL_PollEvent(&Event);
         }
-
-    } while (Event.type != SDL_QUIT);
-    // We exit anytime we get a request to quit the app
-
-    // Cleanup
-    SDL_Quit();
+    }
 
     return 0;
 }

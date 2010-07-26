@@ -61,7 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="SDLmain.lib SDL.lib dglesv2.lib"
+				AdditionalDependencies="SDLmain.lib SDL.lib dglesv2.lib libpdl.lib ws2_32.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="$(PalmPDK)\host\lib"
 				GenerateDebugInformation="true"
@@ -137,7 +137,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="SDLmain.lib SDL.lib dglesv2.lib"
+				AdditionalDependencies="SDLmain.lib SDL.lib dglesv2.lib libpdl.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(PalmPDK)\host\lib"
 				GenerateDebugInformation="true"

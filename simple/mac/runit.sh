@@ -15,5 +15,6 @@ if [ "$EXEC" == "" ];then
         exit 1
 fi
 
-scp -r -P 10022 $BUILDDIR/$APP root@localhost:/media/internal/$APP
+novacom run "file:///usr/bin/killall -9 $APP"
+novacom put file:///media/internal/$APP < $BUILDDIR/$APP
 novacom run file:///media/internal/$EXEC
