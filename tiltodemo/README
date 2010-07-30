@@ -1,0 +1,5 @@
+Tilt-o-Demo is a game sample for Palm webOS and the Plug-In Development Kit (PDK).
+This uses either SDL or OpenGL ES 1.1 to make a simple ball-rolling game.  This also shows
+sound mixing and the accelerometer.
+
+At this time, only build files for Windows are included, Mac scripts will be posted soon.
